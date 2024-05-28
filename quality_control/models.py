@@ -21,11 +21,14 @@ class BugReport(models.Model):
         max_length=100,
         verbose_name="Краткое описание бага",
     )
-    description = models.TextField(verbose_name="Полное описание бага")
+    description = models.TextField(
+        verbose_name="Полное описание бага"
+    )
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
-        related_name="bug_reports"
+        related_name="bug_reports",
+        verbose_name="Проект",
     )
     task = models.ForeignKey(
         Task,
@@ -33,6 +36,7 @@ class BugReport(models.Model):
         null=True,
         blank=True,
         related_name="bug_reports",
+        verbose_name="Задача",
     )
     status = models.CharField(
         max_length=20,
@@ -77,17 +81,22 @@ class FeatureRequest(models.Model):
         max_length=100,
         verbose_name="Название запроса на новую функцию",
     )
-    description = models.TextField(verbose_name="Описание запроса")
+    description = models.TextField(
+        verbose_name="Описание запроса"
+    )
     project = models.ForeignKey(
         Project,
         on_delete=models.CASCADE,
         related_name="feature_requests",
+        verbose_name="Проект",
     )
     task = models.ForeignKey(
         Task,
         on_delete=models.SET_NULL,
-        null=True, blank=True,
+        null=True,
+        blank=True,
         related_name="feature_requests",
+        verbose_name="Задача",
     )
     status = models.CharField(
         max_length=20,
